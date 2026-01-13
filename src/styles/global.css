@@ -1,0 +1,78 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Instrument+Sans:ital,wght@0,400..700;1,400..700&display=swap');
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+  body {
+    @apply font-body text-brand-navy bg-white;
+    font-feature-settings: 'cv11', 'ss01';
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-display font-semibold tracking-tight;
+  }
+
+  ::selection {
+    @apply bg-brand-blue/20 text-brand-navy;
+  }
+}
+
+@layer components {
+  .container-narrow {
+    @apply max-w-5xl mx-auto px-6 lg:px-8;
+  }
+
+  .container-wide {
+    @apply max-w-7xl mx-auto px-6 lg:px-8;
+  }
+
+  .text-gradient {
+    @apply bg-gradient-to-r from-brand-navy via-brand-blue-dark to-brand-blue bg-clip-text text-transparent;
+  }
+
+  .link-underline {
+    @apply relative inline-block;
+  }
+
+  .link-underline::after {
+    content: '';
+    @apply absolute bottom-0 left-0 w-0 h-px bg-brand-blue transition-all duration-300;
+  }
+
+  .link-underline:hover::after {
+    @apply w-full;
+  }
+
+  .card {
+    @apply bg-white border border-slate-200/60 rounded-2xl p-8 transition-all duration-300;
+  }
+
+  .card:hover {
+    @apply border-brand-blue/30 shadow-lg shadow-brand-blue/5;
+  }
+
+  /* Animation delays for staggered reveals */
+  .delay-100 { animation-delay: 100ms; }
+  .delay-200 { animation-delay: 200ms; }
+  .delay-300 { animation-delay: 300ms; }
+  .delay-400 { animation-delay: 400ms; }
+  .delay-500 { animation-delay: 500ms; }
+}
+
+@layer utilities {
+  .animate-on-scroll {
+    opacity: 0;
+  }
+
+  .animate-on-scroll.visible {
+    @apply animate-slide-up;
+  }
+}
