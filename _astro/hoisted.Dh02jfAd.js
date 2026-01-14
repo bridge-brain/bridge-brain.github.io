@@ -1,1 +1,0 @@
-import"./Layout.astro_astro_type_script_index_0_lang.DpccyHB6.js";document.querySelectorAll(".contact-email").forEach(t=>{const e=t.getAttribute("data-user"),n=t.getAttribute("data-domain");t.addEventListener("mouseenter",()=>{e&&n&&(t.textContent=`${e}@${n}`)})});
