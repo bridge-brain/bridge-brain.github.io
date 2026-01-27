@@ -9,21 +9,44 @@ const nav = {
   de: {
     team: 'Team',
     contact: 'Kontakt',
+    login: 'Login',
   },
   en: {
     team: 'Team',
     contact: 'Contact',
+    login: 'Login',
   }
 };
 
 const t = nav[lang];
+
+// Get current path for language switcher
+const currentPath = Astro.url.pathname;
+
+// Calculate the path for the other language (swap /de/ <-> /en/)
+let dePath: string;
+let enPath: string;
+
+if (currentPath.startsWith('/en')) {
+  // Currently on English page - swap /en to /de
+  dePath = currentPath.replace(/^\/en/, '/de');
+  enPath = currentPath;
+} else if (currentPath.startsWith('/de')) {
+  // Currently on German page - swap /de to /en
+  dePath = currentPath;
+  enPath = currentPath.replace(/^\/de/, '/en');
+} else {
+  // Root or unknown - default to language homepages
+  dePath = '/de';
+  enPath = '/en';
+}
 ---
 
 <header class="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-lg border-b border-slate-100">
   <nav class="container-wide">
     <div class="flex items-center justify-between h-16 lg:h-20">
       <!-- Logo -->
-      <a href={lang === 'de' ? '/' : '/en'} class="flex items-center gap-3 group">
+      <a href={lang === 'de' ? '/de' : '/en'} class="flex items-center gap-3 group">
         <img 
           src="/logo.png" 
           alt="bridgebrAIn" 
@@ -33,19 +56,27 @@ const t = nav[lang];
 
       <!-- Navigation -->
       <div class="flex items-center gap-8">
-        <div class="hidden sm:flex items-center gap-8">
+        <!-- <div class="hidden sm:flex items-center gap-8">
           <a href="#team" class="text-sm font-medium text-slate-600 hover:text-brand-navy transition-colors link-underline">
             {t.team}
           </a>
           <a href="#kontakt" class="text-sm font-medium text-slate-600 hover:text-brand-navy transition-colors link-underline">
             {t.contact}
           </a>
-        </div>
+        </div> -->
+
+        <!-- Login Button -->
+        <!-- <a
+          href={lang === 'de' ? '/de/login' : '/en/login'}
+          class="px-5 py-2 bg-brand-navy text-white text-sm font-medium rounded-full hover:bg-brand-blue-dark transition-all duration-300 hover:shadow-lg hover:shadow-brand-navy/20"
+        >
+          {t.login}
+        </a> -->
 
         <!-- Language Switcher -->
         <div class="flex items-center gap-1 text-sm border border-slate-200 rounded-full p-1">
-          <a 
-            href="/" 
+          <a
+            href={dePath}
             class:list={[
               "px-3 py-1 rounded-full transition-all duration-200",
               lang === 'de' ? "bg-brand-navy text-white" : "text-slate-500 hover:text-brand-navy"
@@ -53,8 +84,8 @@ const t = nav[lang];
           >
             DE
           </a>
-          <a 
-            href="/en" 
+          <a
+            href={enPath}
             class:list={[
               "px-3 py-1 rounded-full transition-all duration-200",
               lang === 'en' ? "bg-brand-navy text-white" : "text-slate-500 hover:text-brand-navy"

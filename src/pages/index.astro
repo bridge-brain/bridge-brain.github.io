@@ -1,25 +1,4 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
-import Hero from '../components/Hero.astro';
-import Team from '../components/Team.astro';
-import Contact from '../components/Contact.astro';
-import '../styles/global.css';
+// Redirect to German version by default
+return Astro.redirect('/de');
 ---
-
-<Layout 
-  title="bridgebrAIn – KI-gestützte Strategieberatung für den Mittelstand"
-  description="Professionelle Strategieberatung, ermöglicht durch künstliche Intelligenz. Für kleine und mittlere Unternehmen, die strategisch wachsen wollen."
-  lang="de"
->
-  <Header lang="de" />
-  
-  <main>
-    <Hero lang="de" />
-    <Team lang="de" />
-    <Contact lang="de" />
-  </main>
-
-  <Footer lang="de" />
-</Layout>
