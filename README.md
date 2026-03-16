@@ -12,24 +12,31 @@ Moderne, minimalistische Website für bridgebrAIn – KI-gestützte Strategieber
 
 ```
 bridgebrain-website/
-├── public/              # Statische Assets (Logos, Favicon)
+├── public/              # Statische Assets (Logos, Favicon, Teamfotos)
 ├── src/
 │   ├── components/      # Wiederverwendbare Komponenten
 │   │   ├── Header.astro
 │   │   ├── Footer.astro
 │   │   ├── Hero.astro
+│   │   ├── Products.astro   # Sektion: Unsere Produktentwicklung
+│   │   ├── UseCases.astro   # Sektion: KI-Use-Cases für den Mittelstand
+│   │   ├── Target.astro     # Sektion: Für wen bridgebrAIn gedacht ist
 │   │   ├── Team.astro
 │   │   └── Contact.astro
 │   ├── layouts/         # Seitenlayouts
 │   │   └── Layout.astro
 │   ├── pages/           # Seiten (Routing basiert auf Dateistruktur)
-│   │   ├── index.astro         # Deutsche Homepage
-│   │   ├── impressum.astro
-│   │   ├── datenschutz.astro
+│   │   ├── index.astro         # Redirect → /de
+│   │   ├── de/                 # Deutsche Seiten (Standard-Sprache, kein /de-Prefix nötig)
+│   │   │   ├── index.astro     # Onepager Homepage
+│   │   │   ├── imprint.astro
+│   │   │   ├── privacy.astro
+│   │   │   └── login.astro
 │   │   └── en/                 # Englische Seiten
 │   │       ├── index.astro
 │   │       ├── imprint.astro
-│   │       └── privacy.astro
+│   │       ├── privacy.astro
+│   │       └── login.astro
 │   └── styles/          # Globale Styles
 │       └── global.css
 ├── astro.config.mjs     # Astro Konfiguration
@@ -73,25 +80,19 @@ npm run preview
 
 ## 🌐 Deployment auf GitHub Pages
 
-### Repository einrichten
-
-1. Erstelle ein neues GitHub Repository
-2. Pushe den Code:
+Das Deployment läuft über das `gh-pages`-Paket und deployt direkt in den Branch `gh-pages`:
 
 ```bash
-git init
-git add .
-git commit -m "Initial commit"
-git branch -M main
-git remote add origin https://github.com/DEIN-USERNAME/bridgebrain-website.git
-git push -u origin main
+npm run deploy
 ```
 
-### GitHub Pages aktivieren
+Dieser Befehl baut die Seite (`npm run build`) und pusht das Ergebnis automatisch in den Branch `gh-pages`, von dem GitHub Pages dann ausliefert.
+
+### GitHub Pages einrichten
 
 1. Gehe zu **Settings** → **Pages**
-2. Unter **Source**, wähle **GitHub Actions**
-3. Der Workflow deployt automatisch bei jedem Push zu `main`
+2. Unter **Source**, wähle **Deploy from a branch**
+3. Branch: `gh-pages`, Ordner: `/ (root)`
 
 ### Custom Domain einrichten
 

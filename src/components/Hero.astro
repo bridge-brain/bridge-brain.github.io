@@ -8,15 +8,17 @@ const { lang = 'de' } = Astro.props;
 const hero = {
   de: {
     tagline: 'KI-gestützte Strategieberatung',
-    headline: 'Strategisches Denken.\nFür den Mittelstand.',
-    subheadline: 'Professionelle Unternehmensberatung war bisher nur für Großkonzerne erschwinglich. Wir ändern das.',
-    cta: 'Mehr erfahren',
+    headline: 'KI für strategische\nEntscheidungen im Mittelstand',
+    subheadline: 'Professionelle Unternehmensberatung war bisher nur für große Unternehmen erschwinglich. Wir ändern das.',
+    description: 'bridgebrAIn entwickelt KI-basierte Managementwerkzeuge und unterstützt mittelständische Unternehmen dabei, konkrete KI-Anwendungen für ihre Organisation zu identifizieren und umzusetzen.',
+    cta: 'Kontakt aufnehmen',
   },
   en: {
     tagline: 'AI-powered Strategy Consulting',
-    headline: 'Strategic Thinking.\nFor SMEs.',
+    headline: 'AI for Strategic\nDecisions in SMEs',
     subheadline: 'Professional business consulting was previously only affordable for large corporations. We\'re changing that.',
-    cta: 'Learn more',
+    description: 'bridgebrAIn develops AI-based management tools and supports small and medium-sized enterprises in identifying and implementing concrete AI applications for their organization.',
+    cta: 'Get in touch',
   }
 };
 
@@ -51,14 +53,19 @@ const t = hero[lang];
       </h1>
 
       <!-- Subheadline -->
-      <p class="text-lg sm:text-xl text-slate-600 leading-relaxed max-w-xl mx-auto mb-10 animate-slide-up opacity-0 delay-300">
+      <p class="text-lg sm:text-xl text-slate-600 leading-relaxed max-w-xl mx-auto mb-6 animate-slide-up opacity-0 delay-300">
         {t.subheadline}
       </p>
 
+      <!-- Description -->
+      <p class="text-base text-slate-500 leading-relaxed max-w-2xl mx-auto mb-10 animate-slide-up opacity-0 delay-400">
+        {t.description}
+      </p>
+
       <!-- CTA -->
-      <!-- <div class="animate-slide-up opacity-0 delay-400">
+      <div class="animate-slide-up opacity-0 delay-500">
         <a
-          href="#team"
+          href="#kontakt"
           class="inline-flex items-center gap-2 px-8 py-4 bg-brand-navy text-white font-medium rounded-full hover:bg-brand-blue-dark transition-all duration-300 hover:shadow-lg hover:shadow-brand-navy/20 group"
         >
           {t.cta}
@@ -66,7 +73,7 @@ const t = hero[lang];
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
           </svg>
         </a>
-      </div> -->
+      </div>
     </div>
   </div>
 

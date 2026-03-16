@@ -1,0 +1,76 @@
+---
+interface Props {
+  lang?: 'de' | 'en';
+}
+
+const { lang = 'de' } = Astro.props;
+
+const content = {
+  de: {
+    sectionTag: 'KI-Use-Cases für den Mittelstand',
+    headline: 'Wo KI im Unternehmen tatsächlich wirkt',
+    intro1: 'Viele mittelständische Unternehmen beschäftigen sich intensiv mit KI, stehen aber vor einer zentralen Frage: Wo entstehen tatsächlich sinnvolle Anwendungsfälle?',
+    intro2: 'bridgebrAIn unterstützt Geschäftsführungen und Führungsteams dabei, konkrete KI-Use-Cases im Unternehmen zu identifizieren, strategisch zu priorisieren und gemeinsam mit geeigneten Technologiepartnern umzusetzen.',
+    fieldsLabel: 'Typische Anwendungsfelder',
+    fields: [
+      'Management- und Entscheidungsprozesse',
+      'Strategie- und Transformationsarbeit',
+      'Organisationsentwicklung und Unternehmenssteuerung',
+      'Optimierung operativer Prozesse durch KI-gestützte Analysen und Automatisierung',
+    ],
+  },
+  en: {
+    sectionTag: 'AI Use Cases for SMEs',
+    headline: 'Where AI Actually Creates Value',
+    intro1: 'Many SMEs are actively exploring AI, but face a central question: Where do genuinely useful use cases emerge?',
+    intro2: 'bridgebrAIn supports management teams in identifying concrete AI use cases within their organization, prioritizing them strategically, and implementing them together with suitable technology partners.',
+    fieldsLabel: 'Typical Application Areas',
+    fields: [
+      'Management and decision-making processes',
+      'Strategy and transformation work',
+      'Organizational development and corporate governance',
+      'Optimization of operational processes through AI-powered analysis and automation',
+    ],
+  },
+};
+
+const t = content[lang];
+---
+
+<section id="use-cases" class="py-24 lg:py-32 bg-brand-navy text-white">
+  <div class="container-wide">
+    <div class="max-w-3xl mx-auto text-center mb-16">
+      <span class="inline-block px-4 py-2 bg-white/10 text-white text-sm font-medium rounded-full mb-6 animate-on-scroll">
+        {t.sectionTag}
+      </span>
+      <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold mb-6 animate-on-scroll">
+        {t.headline}
+      </h2>
+      <p class="text-white/70 leading-relaxed mb-4 animate-on-scroll">
+        {t.intro1}
+      </p>
+      <p class="text-white/70 leading-relaxed animate-on-scroll">
+        {t.intro2}
+      </p>
+    </div>
+
+    <div class="animate-on-scroll">
+      <p class="text-sm font-semibold text-brand-blue-light uppercase tracking-wider mb-8 text-center">{t.fieldsLabel}</p>
+      <div class="grid sm:grid-cols-2 gap-4 max-w-3xl mx-auto">
+        {t.fields.map((field, index) => (
+          <div
+            class="flex items-start gap-3 p-5 bg-white/5 border border-white/10 rounded-2xl hover:bg-white/10 transition-colors duration-200"
+            style={`animation-delay: ${(index + 1) * 100}ms`}
+          >
+            <div class="w-5 h-5 mt-0.5 flex-shrink-0">
+              <svg class="w-5 h-5 text-brand-blue-light" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+              </svg>
+            </div>
+            <span class="text-white/90">{field}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
