@@ -1,7 +1,68 @@
 <!DOCTYPE html><html lang="de" class="scroll-smooth"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="description" content="Melden Sie sich bei bridgebrAIn an"><meta name="theme-color" content="#0a1628"><!-- Favicon --><link rel="icon" type="image/png" href="/favicon.png"><link rel="apple-touch-icon" href="/icon.png"><!-- Open Graph --><meta property="og:title" content="Login – bridgebrAIn"><meta property="og:description" content="Melden Sie sich bei bridgebrAIn an"><meta property="og:type" content="website"><meta property="og:url" content="https://bridge-brain.ai"><meta property="og:image" content="https://bridge-brain.ai/logo.png"><title>Login – bridgebrAIn</title><link rel="stylesheet" href="/_astro/imprint.BD_CP6XV.css">
-<link rel="stylesheet" href="/_astro/imprint.DgUfDlE6.css"><script type="module" src="/_astro/hoisted.CBhMF1Fz.js"></script></head> <body class="min-h-screen flex flex-col"> <!-- Password Gate --> <div id="password-gate" class="fixed inset-0 z-50 bg-white flex items-center justify-center"> <div class="text-center p-8 max-w-sm"> <img src="/icon.svg" alt="bridgebrAIn" class="w-16 h-auto mx-auto mb-6"> <h1 class="text-xl font-semibold text-brand-navy mb-4">Preview Access</h1> <form id="password-form" class="space-y-4"> <input type="password" id="password-input" placeholder="Enter password" class="w-full px-4 py-3 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-blue focus:border-transparent" autocomplete="off"> <button type="submit" class="w-full px-4 py-3 bg-brand-navy text-white font-medium rounded-lg hover:bg-brand-blue-dark transition-colors">
-Enter
-</button> <p id="password-error" class="text-red-500 text-sm hidden">Incorrect password</p> </form> </div> </div> <div id="site-content" class="hidden">  <div class="min-h-screen flex"> <!-- Left side - Branding --> <div class="hidden lg:flex lg:w-1/2 bg-gradient-to-br from-brand-navy via-brand-blue-dark to-brand-blue relative overflow-hidden"> <!-- Background pattern --> <div class="absolute inset-0 opacity-10" style="background-image: linear-gradient(rgba(255,255,255,1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,1) 1px, transparent 1px); background-size: 40px 40px;"></div> <!-- Decorative circles --> <div class="absolute top-20 left-20 w-64 h-64 bg-white/5 rounded-full blur-3xl"></div> <div class="absolute bottom-20 right-20 w-96 h-96 bg-white/5 rounded-full blur-3xl"></div> <!-- Content --> <div class="relative z-10 flex flex-col justify-center items-center w-full p-12"> <a href="/de" class="mb-12"> <img src="/icon.svg" alt="bridgebrAIn" class="w-24 h-auto"> </a> <h1 class="text-4xl font-bold text-white text-center mb-4">
+<link rel="stylesheet" href="/_astro/imprint.DgUfDlE6.css"><script type="module" src="/_astro/hoisted.CtVo-6oN.js"></script></head> <body class="min-h-screen flex flex-col"> <!-- PASSWORD GATE (deaktiviert – bei Bedarf wieder einkommentieren)
+    <div id="password-gate" class="fixed inset-0 z-50 bg-white flex items-center justify-center">
+      <div class="text-center p-8 max-w-sm">
+        <img src="/icon.svg" alt="bridgebrAIn" class="w-16 h-auto mx-auto mb-6" />
+        <h1 class="text-xl font-semibold text-brand-navy mb-4">Preview Access</h1>
+        <form id="password-form" class="space-y-4">
+          <input
+            type="password"
+            id="password-input"
+            placeholder="Enter password"
+            class="w-full px-4 py-3 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-blue focus:border-transparent"
+            autocomplete="off"
+          />
+          <button
+            type="submit"
+            class="w-full px-4 py-3 bg-brand-navy text-white font-medium rounded-lg hover:bg-brand-blue-dark transition-colors"
+          >
+            Enter
+          </button>
+          <p id="password-error" class="text-red-500 text-sm hidden">Incorrect password</p>
+        </form>
+      </div>
+    </div>
+
+    <div id="site-content" class="hidden">
+      <slot />
+    </div>
+
+    <script>
+      const HASH = 'b142359db3514cc5429e3aafec369af5a2b558f3879af0156db1ec1a7112f84f';
+      const STORAGE_KEY = 'bb-preview-access';
+
+      async function sha256(message) {
+        const msgBuffer = new TextEncoder().encode(message);
+        const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
+        const hashArray = Array.from(new Uint8Array(hashBuffer));
+        return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+      }
+
+      function unlockSite() {
+        document.getElementById('password-gate')?.classList.add('hidden');
+        document.getElementById('site-content')?.classList.remove('hidden');
+        sessionStorage.setItem(STORAGE_KEY, 'true');
+      }
+
+      if (sessionStorage.getItem(STORAGE_KEY) === 'true') {
+        unlockSite();
+      }
+
+      document.getElementById('password-form')?.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const input = document.getElementById('password-input');
+        const error = document.getElementById('password-error');
+        const hash = await sha256(input.value);
+        if (hash === HASH) {
+          unlockSite();
+        } else {
+          error?.classList.remove('hidden');
+          input.value = '';
+          input.focus();
+        }
+      });
+    </script>
+    -->  <div class="min-h-screen flex"> <!-- Left side - Branding --> <div class="hidden lg:flex lg:w-1/2 bg-gradient-to-br from-brand-navy via-brand-blue-dark to-brand-blue relative overflow-hidden"> <!-- Background pattern --> <div class="absolute inset-0 opacity-10" style="background-image: linear-gradient(rgba(255,255,255,1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,1) 1px, transparent 1px); background-size: 40px 40px;"></div> <!-- Decorative circles --> <div class="absolute top-20 left-20 w-64 h-64 bg-white/5 rounded-full blur-3xl"></div> <div class="absolute bottom-20 right-20 w-96 h-96 bg-white/5 rounded-full blur-3xl"></div> <!-- Content --> <div class="relative z-10 flex flex-col justify-center items-center w-full p-12"> <a href="/de" class="mb-12"> <img src="/icon.svg" alt="bridgebrAIn" class="w-24 h-auto"> </a> <h1 class="text-4xl font-bold text-white text-center mb-4">
 Willkommen zurück
 </h1> <p class="text-white/70 text-center max-w-md text-lg">
 Ihre KI-gestützte Strategieberatung wartet auf Sie.
@@ -22,4 +83,4 @@ Kontaktieren Sie uns
 </a>  für eine persönliche Demo!
 </p> </div> </div> <!-- Back to home --> <div class="mt-6 text-center"> <a href="/de" class="text-sm text-slate-500 hover:text-slate-700 transition-colors inline-flex items-center gap-2"> <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path> </svg>
 Zurück zur Startseite
-</a> </div> </div> </div> </div>   </div>   </body> </html>
+</a> </div> </div> </div> </div>    </body> </html>
